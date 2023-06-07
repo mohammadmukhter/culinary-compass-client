@@ -72,31 +72,35 @@ const NavBar = () => {
         </div>
 
         <div className="navbar-end space-x-3">
-          <div>
-            <Link to="/login">
-              <PrimaryButton>Log In</PrimaryButton>
-            </Link>
-
-            <PrimaryButton clickHandler={logOut}>Log Out</PrimaryButton>
-          </div>
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src={user?.photoURL} />
+          {user && user.email ? (
+            <div className="flex items-center">
+              <PrimaryButton clickHandler={logOut}>Log Out</PrimaryButton>
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img src={user?.photoURL} />
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <a className="justify-between">
+                      Profile
+                      <span className="badge">New</span>
+                    </a>
+                  </li>
+                </ul>
               </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+            </div>
+          ) : (
+            <div>
+              <Link to="/login">
+                <PrimaryButton>Log In</PrimaryButton>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

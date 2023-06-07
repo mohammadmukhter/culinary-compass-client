@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bgImg from "../../assets/banner/chinese.jpg";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import useAuth from "../../hooks/useAuth";
@@ -8,6 +8,7 @@ import useAuth from "../../hooks/useAuth";
 const Register = () => {
   const { registerHandler, updateHandler } = useAuth();
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const {
     register,
@@ -34,6 +35,7 @@ const Register = () => {
               console.log(registeredUser);
               reset();
               setError("");
+              navigate("/");
             })
             .catch((err) => {
               console.log(err);
