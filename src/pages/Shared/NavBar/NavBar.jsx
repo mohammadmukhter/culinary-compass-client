@@ -1,8 +1,21 @@
 import { Link } from "react-router-dom";
 import logoImg from "../../../assets/culinaryLogo.svg";
 import PrimaryButton from "../../../components/PrimaryButton/PrimaryButton";
+import useAuth from "../../../hooks/useAuth";
 
 const NavBar = () => {
+  const { user, logOutHandler } = useAuth();
+
+  const logOut = () => {
+    logOutHandler()
+      .then(() => {
+        console.log("log out successfull");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const listItem = (
     <>
       <li>
@@ -63,11 +76,13 @@ const NavBar = () => {
             <Link to="/login">
               <PrimaryButton>Log In</PrimaryButton>
             </Link>
+
+            <PrimaryButton clickHandler={logOut}>Log Out</PrimaryButton>
           </div>
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                <img src={user?.photoURL} />
               </div>
             </label>
             <ul

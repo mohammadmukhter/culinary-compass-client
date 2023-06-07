@@ -1,16 +1,48 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import bgImg from "../../assets/banner/chinese.jpg";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
+import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
+  const { registerHandler, updateHandler } = useAuth();
+  const [error, setError] = useState("");
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
+
+    setError("");
+
+    if (data.password !== data.confirmPassword) {
+      setError("Confirm password does not matched!");
+      return;
+    }
+
+    registerHandler(data.email, data.password)
+      .then((res) => {
+        const registeredUser = res.user;
+        if (registeredUser) {
+          updateHandler(data.name, data.photoUrl)
+            .then(() => {
+              console.log(registeredUser);
+              reset();
+              setError("");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -116,6 +148,9 @@ const Register = () => {
                       )}
                     </div>
                   </div>
+                  <label className="label">
+                    <span className="text-red-600 mx-auto">{error}</span>
+                  </label>
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text">Photo URL</span>
@@ -138,6 +173,7 @@ const Register = () => {
                     </PrimaryButton>
                   </div>
                 </form>
+
                 <div className="form-control mx-7 mb-5">
                   <label className="label">
                     <span className="text-black label-text-alt">

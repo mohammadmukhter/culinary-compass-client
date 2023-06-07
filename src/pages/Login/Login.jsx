@@ -1,16 +1,43 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bgImg from "../../assets/banner/pastry2.jpg";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
+  const { loginHandler, googleHandler } = useAuth();
+  const navigate = useNavigate();
+
+  const google = () => {
+    googleHandler()
+      .then((res) => {
+        const user = res.user;
+        console.log(user);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
+
+    loginHandler(data.email, data.password)
+      .then((res) => {
+        const loggedUser = res.user;
+        console.log(loggedUser);
+        reset();
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -31,7 +58,10 @@ const Login = () => {
                 <h2 className="text-gray-800 text-3xl font-bold mt-6">
                   Please Login
                 </h2>
-                <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
+                <form
+                  className="card-body pb-4 px-6 pt-4"
+                  onSubmit={handleSubmit(onSubmit)}
+                >
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text">Email</span>
@@ -70,6 +100,15 @@ const Login = () => {
                     </PrimaryButton>
                   </div>
                 </form>
+
+                <div className="form-control mx-6 ">
+                  <button
+                    onClick={google}
+                    className=" bg-white px-8 mb-4 py-1 font-bold rounded hover:text-blue-600"
+                  >
+                    Google Log In
+                  </button>
+                </div>
                 <div className="form-control mx-7 mb-5">
                   <label className="label">
                     <span className="text-black label-text-alt">
