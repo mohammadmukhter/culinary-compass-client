@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -33,6 +34,21 @@ const Register = () => {
           updateHandler(data.name, data.photoUrl)
             .then(() => {
               console.log(registeredUser);
+              const userInfo = {
+                name: data.name,
+                email: data.email,
+                photoUrl: data.photoUrl,
+              };
+
+              axios
+                .post("http://localhost:5000/users", userInfo)
+                .then((res) => {
+                  console.log(res.data);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+
               reset();
               setError("");
               navigate("/");
