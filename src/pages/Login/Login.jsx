@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgImg from "../../assets/banner/pastry2.jpg";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import useAuth from "../../hooks/useAuth";
@@ -7,33 +7,37 @@ import useAuth from "../../hooks/useAuth";
 const Login = () => {
   const { loginHandler, googleHandler } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const google = () => {
     googleHandler()
       .then((res) => {
         const user = res.user;
         console.log(user);
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
+
   const onSubmit = (data) => {
     // console.log(data);
-
     loginHandler(data.email, data.password)
       .then((res) => {
         const loggedUser = res.user;
         console.log(loggedUser);
         reset();
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);
