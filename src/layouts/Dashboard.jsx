@@ -22,10 +22,10 @@ const Dashboard = () => {
               <Link to="/dashboard/instructorHome">Instruct Home</Link>
             </li>
             <li>
-              <Link>Add Class</Link>
+              <Link to="/dashboard/addClass">Add Class</Link>
             </li>
             <li>
-              <Link>My Classes</Link>
+              <Link to="/dashboard/myClasses">My Classes</Link>
             </li>
           </ul>
         </div>
