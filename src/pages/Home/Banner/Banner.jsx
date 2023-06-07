@@ -60,7 +60,7 @@ const Banner = () => {
         <div className=" text-white absolute top-[30%] left-0 max-w-md mx-24">
           <div className="space-y-5">
             <h3 className="text-5xl font-semibold uppercase text-left">
-              Explore, how to make different types of Pastry Items and Your can
+              Explore, how to make different types of Pastry Items and You can
               learn this.
             </h3>
 
@@ -75,7 +75,7 @@ const Banner = () => {
         <div className=" text-white  absolute top-[30%] left-0 max-w-md mx-24">
           <div className="space-y-5">
             <h3 className="text-5xl font-semibold uppercase text-left">
-              Explore, how to make different types of Pastry Items and Your can
+              Explore, how to make different types of Pastry Items and You can
               learn this.
             </h3>
 
