@@ -60,7 +60,9 @@ const NavBar = () => {
 
         <div className="navbar-end space-x-3">
           <div>
-            <PrimaryButton>Log Out</PrimaryButton>
+            <Link to="/login">
+              <PrimaryButton>Log In</PrimaryButton>
+            </Link>
           </div>
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

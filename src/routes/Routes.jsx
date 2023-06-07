@@ -5,6 +5,8 @@ import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass/AddClass";
 import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome/InstructorHome";
 import MyClasses from "../pages/Dashboard/InstructorDashboard/MyClasses/MyClasses";
 import Home from "../pages/Home/Home/Home";
+import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
 
 const Routes = createBrowserRouter([
   {
@@ -14,6 +16,14 @@ const Routes = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "register",
+        element: <Register></Register>,
       },
     ],
   },
