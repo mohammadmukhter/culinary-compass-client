@@ -1,9 +1,19 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import useAllClassesData from "../../../../hooks/useAllClassesData";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const ManageClasses = () => {
   const [allClasses, allClassesLoading, refetch] = useAllClassesData();
   const [axiosSecure] = useAxiosSecure();
+  const [selectedId, setSelectedId] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
   // console.log(allClasses);
 
   if (allClassesLoading) {
@@ -26,6 +36,10 @@ const ManageClasses = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const feedbackHandler = (data) => {
+    console.log(data);
   };
 
   return (
@@ -114,14 +128,52 @@ const ManageClasses = () => {
                     >
                       Deny
                     </button>
-                    <button className="btn btn-ghost px-3 rounded-md  py-1  bg-blue-600 text-white">
+
+                    <label
+                      onClick={() => {
+                        setSelectedId(data._id);
+                      }}
+                      htmlFor="my_modal_6"
+                      className="btn btn-ghost px-3 rounded-md  py-1  bg-blue-600 text-white"
+                    >
                       Send Feedback
-                    </button>
+                    </label>
                   </td>
                 </tr>
               ))}
           </tbody>
         </table>
+      </div>
+
+      {/* feedback modal */}
+
+      <input type="checkbox" id="my_modal_6" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Send FeedBack About Class</h3>
+          <form onSubmit={handleSubmit(feedbackHandler)}>
+            <div className="form-control">
+              <textarea
+                className="textarea textarea-bordered h-24"
+                {...register("feedback", { required: true })}
+                placeholder="Feedback"
+              ></textarea>
+              {errors.feedback && (
+                <span className="text-red-600 text-left text-sm">
+                  Feedback is required
+                </span>
+              )}
+            </div>
+            <button className="btn bg-green-600 text-white">
+              Send Feedback
+            </button>
+          </form>
+          <div className="modal-action">
+            <label htmlFor="my_modal_6" className="btn">
+              Close!
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   );
