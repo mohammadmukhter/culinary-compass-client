@@ -7,7 +7,7 @@ const useClassesData = () => {
     const [axiosSecure] = useAxiosSecure();
 
 
-    const {data: classes=[], isLoading: classesLoading} = useQuery({ 
+    const {data: classes = [], isLoading: classesLoading} = useQuery({ 
         queryKey: ['classes', user?.email],
         enabled:!!user?.email && !!localStorage.getItem('access-token'),
   
@@ -16,7 +16,8 @@ const useClassesData = () => {
           return fetchedData.data;
         },
       });
-
+      
+      return [classes, classesLoading];
 
     // useEffect(()=> {
     //     const fetcher = async()=> {
@@ -29,8 +30,6 @@ const useClassesData = () => {
 
     // }, [user, axiosSecure, loading]);
     
-
-    return [classes, classesLoading];
 
 };
 

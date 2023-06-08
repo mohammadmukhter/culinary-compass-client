@@ -2,8 +2,13 @@ import { Link } from "react-router-dom";
 import useClassesData from "../../../../hooks/useClassesData";
 
 const MyClasses = () => {
-  const user = useClassesData();
-  console.log(user);
+  const [classes, classesLoading] = useClassesData();
+  console.log(classes);
+
+  if (classesLoading) {
+    return <h2>Loading....</h2>;
+  }
+
   return (
     <div className="w-full px-4">
       <div className=" bg-[#606C5D] py-4 flex flex-col md:flex-row justify-start md:justify-center items-center rounded">
@@ -28,7 +33,7 @@ const MyClasses = () => {
                 Instructor
               </td>
               <td className="border-[2px] px-2 py-1 text-lg uppercase font-semibold">
-                ABC
+                {classes[0]?.instructorName}
               </td>
             </tr>
             <tr>
@@ -36,7 +41,7 @@ const MyClasses = () => {
                 Instructor Email
               </td>
               <td className="border-[2px] px-2 py-1 text-lg uppercase font-semibold">
-                abc@email.com
+                {classes[0]?.instructorEmail}
               </td>
             </tr>
             <tr>
@@ -44,7 +49,7 @@ const MyClasses = () => {
                 Total Classes
               </td>
               <td className="border-[2px] px-2 py-1 text-lg uppercase font-semibold">
-                20
+                {classes?.length}
               </td>
             </tr>
           </tbody>
@@ -58,6 +63,7 @@ const MyClasses = () => {
               <th className="border-[1px] rounded-sm">Photo</th>
               <th className="border-[1px] rounded-sm">Class Name</th>
               <th className="border-[1px] rounded-sm">Price</th>
+              <th className="border-[1px] rounded-sm">Available Seat</th>
               <th className="border-[1px] rounded-sm">Enrolled</th>
               <th className="border-[1px] rounded-sm">Status</th>
               <th className="border-[1px] rounded-sm">Feedback</th>
@@ -65,34 +71,44 @@ const MyClasses = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700/80">
-            <tr>
-              <th className=" font-semibold border-[1px] rounded-sm">
-                {0 + 1}
-              </th>
-              <td className="border-[1px] rounded-sm">
-                <div className="avatar">
-                  <div className="mask mask-squircle w-12 h-12">
-                    <img src="" />
-                  </div>
-                </div>
-              </td>
-              <td className=" font-semibold border-[1px] rounded-sm">pastry</td>
-              <td className="text-end font-semibold border-[1px] rounded-sm">
-                $2000
-              </td>
-              <td className=" font-semibold border-[1px] rounded-sm">0</td>
-              <td className=" font-semibold border-[1px] rounded-sm">
-                pending
-              </td>
-              <td className=" font-semibold border-[1px] rounded-sm">
-                nothing
-              </td>
-              <td className=" border-[1px] rounded-sm">
-                <button className="btn btn-ghost btn-xs bg-orange-600 text-white">
-                  update
-                </button>
-              </td>
-            </tr>
+            {classes &&
+              classes.map((data, index) => (
+                <tr key={data._id}>
+                  <th className=" font-semibold border-[1px] rounded-sm">
+                    {index + 1}
+                  </th>
+                  <td className="border-[1px] rounded-sm">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img src={data.classImage} />
+                      </div>
+                    </div>
+                  </td>
+                  <td className=" font-semibold border-[1px] rounded-sm">
+                    {data.className}
+                  </td>
+                  <td className="text-end font-semibold border-[1px] rounded-sm">
+                    {data.price}
+                  </td>
+                  <td className=" font-semibold border-[1px] rounded-sm">
+                    {data?.availAbleSeat}
+                  </td>
+                  <td className=" font-semibold border-[1px] rounded-sm">
+                    {data?.enrolled ? data.enrolled : 0}
+                  </td>
+                  <td className=" font-semibold border-[1px] rounded-sm">
+                    {data.status}
+                  </td>
+                  <td className=" font-semibold border-[1px] rounded-sm">
+                    {data?.feedback ? data.feedback : ""}
+                  </td>
+                  <td className=" border-[1px] rounded-sm">
+                    <button className="btn btn-ghost btn-xs bg-orange-600 text-white">
+                      update
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

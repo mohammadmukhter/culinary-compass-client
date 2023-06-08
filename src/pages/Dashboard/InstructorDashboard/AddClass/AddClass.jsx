@@ -5,7 +5,7 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const AddClass = () => {
   const { user } = useAuth();
-  const imgURL = `https://api.imgbb.com/1/upload?expiration=600&key=${
+  const imgURL = `https://api.imgbb.com/1/upload?key=${
     import.meta.env.VITE_image_upload
   }`;
 
@@ -94,7 +94,7 @@ const AddClass = () => {
           </div>
 
           <div className="flex flex-col md:flex-row  gap-4">
-            <div className="form-control">
+            <div className="form-control w-1/2">
               <label className="label">
                 <span className="label-text">Instructor Name</span>
               </label>
@@ -111,7 +111,7 @@ const AddClass = () => {
                 </span>
               )}
             </div>
-            <div className="form-control">
+            <div className="form-control w-1/2">
               <label className="label">
                 <span className="label-text">Instructor Email</span>
               </label>
@@ -131,7 +131,7 @@ const AddClass = () => {
           </div>
 
           <div className="flex flex-col md:flex-row  gap-4">
-            <div className="form-control">
+            <div className="form-control w-1/2">
               <label className="label">
                 <span className="label-text">Available Seat</span>
               </label>
@@ -147,7 +147,7 @@ const AddClass = () => {
                 </span>
               )}
             </div>
-            <div className="form-control">
+            <div className="form-control w-1/2">
               <label className="label">
                 <span className="label-text">Price</span>
               </label>

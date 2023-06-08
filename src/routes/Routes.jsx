@@ -1,6 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../layouts/Dashboard";
 import Main from "../layouts/Main";
+import AdminHome from "../pages/Dashboard/AdminDashboard/AdminHome/AdminHome";
+import ManageClasses from "../pages/Dashboard/AdminDashboard/ManageClasses/ManageClasses";
+import ManageUsers from "../pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass/AddClass";
 import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome/InstructorHome";
 import MyClasses from "../pages/Dashboard/InstructorDashboard/MyClasses/MyClasses";
@@ -10,6 +13,7 @@ import Register from "../pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 
 const Routes = createBrowserRouter([
+  // home route
   {
     path: "/",
     element: <Main></Main>,
@@ -28,6 +32,8 @@ const Routes = createBrowserRouter([
       },
     ],
   },
+
+  // dashboard route
   {
     path: "dashboard",
     element: (
@@ -37,6 +43,7 @@ const Routes = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // Instructor routes here
       {
         path: "instructorHome",
         element: <InstructorHome></InstructorHome>,
@@ -48,6 +55,20 @@ const Routes = createBrowserRouter([
       {
         path: "myClasses",
         element: <MyClasses></MyClasses>,
+      },
+
+      // admin routes here
+      {
+        path: "adminHome",
+        element: <AdminHome></AdminHome>,
+      },
+      {
+        path: "manageClasses",
+        element: <ManageClasses></ManageClasses>,
+      },
+      {
+        path: "manageUsers",
+        element: <ManageUsers></ManageUsers>,
       },
     ],
   },
