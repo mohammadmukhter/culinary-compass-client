@@ -22,6 +22,7 @@ const Login = () => {
             name: user.displayName,
             email: user.email,
             photoUrl: user.photoURL,
+            role: "student",
           };
 
           axios

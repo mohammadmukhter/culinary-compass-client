@@ -38,6 +38,7 @@ const Register = () => {
                 name: data.name,
                 email: data.email,
                 photoUrl: data.photoUrl,
+                role: "student",
               };
 
               axios
