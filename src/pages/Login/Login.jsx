@@ -11,6 +11,7 @@ const Login = () => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
+  console.log(from);
 
   const google = () => {
     googleHandler()
@@ -27,12 +28,12 @@ const Login = () => {
             .post("http://localhost:5000/users", userInfo)
             .then((res) => {
               console.log(res.data);
+              navigate(from, { replace: true });
             })
             .catch((err) => {
               console.log(err);
             });
         }
-        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);
@@ -47,12 +48,11 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    // console.log(data);
     loginHandler(data.email, data.password)
       .then((res) => {
         const loggedUser = res.user;
-        // console.log(loggedUser);
         console.log(loggedUser);
+
         reset();
         navigate(from, { replace: true });
       })

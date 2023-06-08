@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -37,6 +38,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const googleHandler = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
@@ -46,9 +48,25 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (current_user) => {
-      console.log(current_user);
-      setUser(current_user);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      // console.log(currentUser);
+      setUser(currentUser);
+
+      if (currentUser) {
+        axios
+          .post("http://localhost:5000/jwt", {
+            email: currentUser.email,
+          })
+          .then((res) => {
+            // console.log(res.data);
+            const token = res.data;
+            localStorage.setItem("access-token", token);
+          })
+          .catch((err) => console.log(err));
+      } else {
+        localStorage.removeItem("access-token");
+      }
+
       setLoading(false);
     });
 
