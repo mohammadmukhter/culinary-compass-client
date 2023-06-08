@@ -1,8 +1,9 @@
-import axios from "axios";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useUsersFetchData from "../../../../hooks/useUsersFetchData";
 
 const ManageUsers = () => {
   const [allClasses, allClassesLoading, refetch] = useUsersFetchData();
+  const [axiosSecure] = useAxiosSecure();
   // console.log(allClasses);
 
   if (allClassesLoading) {
@@ -12,7 +13,7 @@ const ManageUsers = () => {
   const roleChangeHandler = (userId, userRole) => {
     console.log(userId, userRole);
 
-    axios
+    axiosSecure
       .patch(`http://localhost:5000/users/${userId}`, {
         role: userRole,
       })

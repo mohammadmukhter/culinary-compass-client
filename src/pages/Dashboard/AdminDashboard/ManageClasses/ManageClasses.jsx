@@ -1,12 +1,32 @@
 import useAllClassesData from "../../../../hooks/useAllClassesData";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const ManageClasses = () => {
-  const [allClasses, allClassesLoading] = useAllClassesData();
-  console.log(allClasses);
+  const [allClasses, allClassesLoading, refetch] = useAllClassesData();
+  const [axiosSecure] = useAxiosSecure();
+  // console.log(allClasses);
 
   if (allClassesLoading) {
     return <h2>Loading....</h2>;
   }
+
+  const statusChangeHandler = (classId, classStatus) => {
+    console.log(classId, classStatus);
+
+    axiosSecure
+      .patch(`http://localhost:5000/classes/${classId}`, {
+        status: classStatus,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.modifiedCount > 0) {
+          refetch();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="w-full px-4">
@@ -62,14 +82,36 @@ const ManageClasses = () => {
                   </td>
 
                   <td className=" font-semibold border-[1px] rounded-sm">
-                    {data.status}
+                    {data.status === "pending" && (
+                      <span className="text-orange-600">Pending</span>
+                    )}
+                    {data.status === "approved" && (
+                      <span className="text-green-600">Approved</span>
+                    )}
+                    {data.status === "denied" && (
+                      <span className="text-red-600">Denied</span>
+                    )}
                   </td>
 
                   <td className=" border-[1px] rounded-sm space-y-1">
-                    <button className="btn btn-ghost px-4 py-1  bg-green-600 text-white">
+                    <button
+                      disabled={
+                        (data.status === "approved" && "disabled") ||
+                        (data.status === "denied" && "disabled")
+                      }
+                      onClick={() => statusChangeHandler(data._id, "approved")}
+                      className="btn btn-ghost px-4 py-1  bg-green-600 text-white"
+                    >
                       Approve
                     </button>
-                    <button className="btn btn-ghost px-4 py-1   bg-red-600 text-white">
+                    <button
+                      disabled={
+                        (data.status === "approved" && "disabled") ||
+                        (data.status === "denied" && "disabled")
+                      }
+                      onClick={() => statusChangeHandler(data._id, "denied")}
+                      className="btn btn-ghost px-4 py-1   bg-red-600 text-white"
+                    >
                       Deny
                     </button>
                     <button className="btn btn-ghost px-3 rounded-md  py-1  bg-blue-600 text-white">
