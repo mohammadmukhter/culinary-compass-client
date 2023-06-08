@@ -33,7 +33,7 @@ const Register = () => {
         if (registeredUser) {
           updateHandler(data.name, data.photoUrl)
             .then(() => {
-              console.log(registeredUser);
+              // console.log(registeredUser);
               const userInfo = {
                 name: data.name,
                 email: data.email,

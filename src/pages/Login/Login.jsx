@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgImg from "../../assets/banner/pastry2.jpg";
@@ -15,7 +16,22 @@ const Login = () => {
     googleHandler()
       .then((res) => {
         const user = res.user;
-        console.log(user);
+        if (user) {
+          const userInfo = {
+            name: user.displayName,
+            email: user.email,
+            photoUrl: user.photoURL,
+          };
+
+          axios
+            .post("http://localhost:5000/users", userInfo)
+            .then((res) => {
+              console.log(res.data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
         navigate(from, { replace: true });
       })
       .catch((err) => {
@@ -35,6 +51,7 @@ const Login = () => {
     loginHandler(data.email, data.password)
       .then((res) => {
         const loggedUser = res.user;
+        // console.log(loggedUser);
         console.log(loggedUser);
         reset();
         navigate(from, { replace: true });
@@ -136,3 +153,6 @@ const Login = () => {
 };
 
 export default Login;
+
+// name: user.displayName,
+//           email: user.email,
