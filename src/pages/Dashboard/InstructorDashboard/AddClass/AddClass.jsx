@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
 import PrimaryButton from "../../../../components/PrimaryButton/PrimaryButton";
 import useAuth from "../../../../hooks/useAuth";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const AddClass = () => {
   const { user } = useAuth();
   const imgURL = `https://api.imgbb.com/1/upload?expiration=600&key=${
     import.meta.env.VITE_image_upload
   }`;
+
+  const [axiosSecure] = useAxiosSecure();
 
   const {
     register,
@@ -48,9 +51,18 @@ const AddClass = () => {
             availAbleSeat: parseInt(availAbleSeat),
             price: parseFloat(price),
             classImage: imageUrl,
+            status: "pending",
           };
 
-          console.log(newItem);
+          axiosSecure
+            .post("/classes", newItem)
+            .then((res) => {
+              console.log(res.data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
           reset();
         }
       })
@@ -58,9 +70,9 @@ const AddClass = () => {
   };
 
   return (
-    <div className="mb-12">
-      <div className="card  w-full mt-12 shadow-2xl bg-base-100/50">
-        <h2 className="text-gray-800 text-3xl font-bold mt-6 text-center">
+    <div className="mb-12 mx-4">
+      <div className="card  w-full shadow-2xl bg-base-100/50">
+        <h2 className=" bg-[#606C5D] py-4 text-gray-100 rounded-md text-3xl font-bold mt-6 text-center">
           Add a Class
         </h2>
         <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
@@ -126,10 +138,10 @@ const AddClass = () => {
               <input
                 type="number"
                 placeholder="Available Seat"
-                {...register("availableSeat", { required: true })}
+                {...register("availAbleSeat", { required: true })}
                 className="input input-bordered"
               />
-              {errors.availableSeat && (
+              {errors.availAbleSeat && (
                 <span className="text-red-600 text-left text-sm w-64 mt-1">
                   Available Seat is required
                 </span>

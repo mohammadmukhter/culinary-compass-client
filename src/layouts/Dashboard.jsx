@@ -13,7 +13,7 @@ const Dashboard = () => {
       </div>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
+        <div className="drawer-content flex flex-col my-4">
           <Outlet></Outlet>
         </div>
         <div className="drawer-side">
@@ -28,6 +28,16 @@ const Dashboard = () => {
             </li>
             <li>
               <Link to="/dashboard/myClasses">My Classes</Link>
+            </li>
+            <div className="divider"></div>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="">Instructors</Link>
+            </li>
+            <li>
+              <Link to="">Classes</Link>
             </li>
           </ul>
         </div>
