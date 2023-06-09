@@ -16,11 +16,13 @@ const CheckOutForm = ({ classData }) => {
   const price = parseFloat(classData.price);
 
   useEffect(() => {
-    axiosSecure
-      .post("http://localhost:5000/createPaymentIntent", { price })
-      .then((res) => {
-        setClientSecret(res.data.clientSecret);
-      });
+    if (price > 0) {
+      axiosSecure
+        .post("http://localhost:5000/createPaymentIntent", { price })
+        .then((res) => {
+          setClientSecret(res.data.clientSecret);
+        });
+    }
   }, [price, axiosSecure]);
 
   const handleSubmit = async (event) => {
@@ -78,8 +80,14 @@ const CheckOutForm = ({ classData }) => {
         selectedClassId: classData._id,
         price,
         date: new Date(),
-        status: "servicesPending",
+        status: "servicePending",
       };
+
+      axiosSecure.post("/payments", paymentInfo).then((res) => {
+        if (res.data.insertedId) {
+          console.log("Payment data inserted Successfully");
+        }
+      });
     }
   };
   return (
