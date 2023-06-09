@@ -97,9 +97,17 @@ const MyClasses = () => {
                     {data?.enrolled ? data.enrolled : 0}
                   </td>
                   <td className=" font-semibold border-[1px] rounded-sm">
-                    {data.status}
+                    {data?.status === "pending" && (
+                      <span className="text-orange-600 font-bold">Pending</span>
+                    )}
+                    {data?.status === "approved" && (
+                      <span className="text-green-600 font-bold">Approved</span>
+                    )}
+                    {data?.status === "denied" && (
+                      <span className="text-red-600 font-bold">Denied</span>
+                    )}
                   </td>
-                  <td className=" font-semibold border-[1px] rounded-sm">
+                  <td className=" font-semibold border-[1px] rounded-sm text-red-600">
                     {data?.feedback ? data.feedback : ""}
                   </td>
                   <td className=" border-[1px] rounded-sm">
