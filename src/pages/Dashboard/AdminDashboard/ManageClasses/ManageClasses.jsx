@@ -20,11 +20,12 @@ const ManageClasses = () => {
     return <h2>Loading....</h2>;
   }
 
+  //class status change handler
   const statusChangeHandler = (classId, classStatus) => {
     console.log(classId, classStatus);
 
     axiosSecure
-      .patch(`http://localhost:5000/classes/${classId}`, {
+      .patch(`/classes/${classId}`, {
         status: classStatus,
       })
       .then((res) => {
@@ -38,8 +39,25 @@ const ManageClasses = () => {
       });
   };
 
+  // feedback send handler
   const feedbackHandler = (data) => {
-    console.log(data);
+    console.log(data, selectedId);
+    axiosSecure
+      .patch(`/classesFeedback/${selectedId}`, {
+        feedback: data.feedback,
+      })
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data.modifiedCount > 0) {
+          console.log("Feedback sent successfully");
+          refetch();
+          reset();
+          setSelectedId(null);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

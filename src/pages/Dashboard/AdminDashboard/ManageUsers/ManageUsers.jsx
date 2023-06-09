@@ -14,7 +14,7 @@ const ManageUsers = () => {
     console.log(userId, userRole);
 
     axiosSecure
-      .patch(`http://localhost:5000/users/${userId}`, {
+      .patch(`/users/${userId}`, {
         role: userRole,
       })
       .then((res) => {
