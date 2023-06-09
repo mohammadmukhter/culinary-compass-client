@@ -36,7 +36,7 @@ const Classes = () => {
       </div>
       <div className="mx-4 grid grid-cols-1 md:grid-cols-3 gap-6">
         {approvedClasses.map((data) => (
-          <ClassCard data={data} key={data._id}></ClassCard>
+          <ClassCard data={data} key={data._id} refetch={refetch}></ClassCard>
         ))}
       </div>
     </div>
