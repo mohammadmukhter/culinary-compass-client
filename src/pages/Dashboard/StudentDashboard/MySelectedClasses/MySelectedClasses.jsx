@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useSelectedClasses from "../../../../hooks/useSelectedClasses";
 
 const MySelectedClasses = () => {
@@ -24,7 +25,7 @@ const MySelectedClasses = () => {
               <td className="border-[2px] px-2 py-1 text-lg uppercase">
                 Student Email
               </td>
-              <td className="border-[2px] px-2 py-1 text-lg uppercase font-semibold">
+              <td className="border-[2px] px-2 py-1 text-lg font-semibold">
                 {selectedClasses[0]?.studentEmail}
               </td>
             </tr>
@@ -67,9 +68,11 @@ const MySelectedClasses = () => {
                     {data.price}
                   </td>
                   <td className=" border-[1px] rounded-sm space-y-1">
-                    <button className="btn btn-ghost btn-xs bg-orange-600 text-white">
-                      Pay
-                    </button>
+                    <Link to="/dashboard/payment" state={{ classData: data }}>
+                      <button className="btn btn-ghost btn-xs bg-orange-600 text-white">
+                        Pay
+                      </button>
+                    </Link>
                     <br />
                     <button className="btn btn-ghost btn-xs bg-red-600 text-white">
                       Delete

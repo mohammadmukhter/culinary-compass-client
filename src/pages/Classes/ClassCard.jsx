@@ -23,7 +23,7 @@ const ClassCard = ({ data, refetch }) => {
       axiosSecure
         .post("/selectedClasses", insertAbleData)
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
           refetch();
         })
         .catch((err) => console.log(err));
