@@ -69,11 +69,22 @@ const ManageUsers = () => {
                     {data.email}
                   </td>
                   <td className="text-end font-semibold border-[1px] rounded-sm">
-                    {data?.role ? data.role : "student"}
+                    {data?.role === "admin" && (
+                      <span className="text-blue-800 font-bold">Admin</span>
+                    )}
+                    {data?.role === "instructor" && (
+                      <span className="text-orange-600 font-bold">
+                        Instructor
+                      </span>
+                    )}
+                    {data?.role === "student" && (
+                      <span className="text-gray-800 font-bold">Student</span>
+                    )}
                   </td>
 
                   <td className=" border-[1px] rounded-sm space-y-1">
                     <button
+                      disabled={data?.role === "instructor" && "disabled"}
                       onClick={() => roleChangeHandler(data._id, "instructor")}
                       className="btn btn-ghost px-4 py-1  bg-orange-600 text-white"
                     >
@@ -81,6 +92,7 @@ const ManageUsers = () => {
                     </button>
                     <br />
                     <button
+                      disabled={data?.role === "admin" && "disabled"}
                       onClick={() => roleChangeHandler(data._id, "admin")}
                       className="btn btn-ghost px-4 py-1   bg-blue-600 text-white"
                     >
