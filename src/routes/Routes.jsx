@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../layouts/Dashboard";
 import Main from "../layouts/Main";
+import Classes from "../pages/Classes/Classes";
 import AdminHome from "../pages/Dashboard/AdminDashboard/AdminHome/AdminHome";
 import ManageClasses from "../pages/Dashboard/AdminDashboard/ManageClasses/ManageClasses";
 import ManageUsers from "../pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
@@ -32,6 +33,10 @@ const Routes = createBrowserRouter([
       {
         path: "register",
         element: <Register></Register>,
+      },
+      {
+        path: "classes",
+        element: <Classes></Classes>,
       },
     ],
   },

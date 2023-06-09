@@ -26,7 +26,7 @@ const NavBar = () => {
       </li>
       <li>
         {" "}
-        <Link>Classes</Link>
+        <Link to="classes">Classes</Link>
       </li>
       <li>
         <Link to="/dashboard/instructorHome">Dashboard</Link>
