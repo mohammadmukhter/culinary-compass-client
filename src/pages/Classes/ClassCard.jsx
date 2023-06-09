@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import SecondaryButton from "../../components/SecondaryButton/SecondaryButton";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
@@ -14,6 +13,7 @@ const ClassCard = ({ data, refetch }) => {
       className: data.className,
       classImage: data.classImage,
       classId,
+      studentEmail: user?.email,
       instructorName: data.instructorName,
       instructorEmail: data.instructorEmail,
       price: parseFloat(data.price),
@@ -41,7 +41,11 @@ const ClassCard = ({ data, refetch }) => {
             alt="car!"
           />
         </figure>
-        <div className="card-body bg-white rounded-md px-0 pt-0">
+        <div
+          className={`card-body ${
+            data.availAbleSeat < 1 ? "bg-red-400" : "bg-white"
+          } rounded-md px-0 pt-0`}
+        >
           <h2 className=" py-1 text-2xl font-bold text-center bg-black/80 text-white">
             {data.className}
           </h2>
@@ -70,9 +74,13 @@ const ClassCard = ({ data, refetch }) => {
           </table>
 
           <div className="card-actions justify-center">
-            <SecondaryButton clickHandler={() => selectHandler(data._id)}>
+            <button
+              className=" border-[1px] border-white px-4 py-1 bg-[#1F8A70] text-white hover:bg-yellow-900 hover:text-white disabled:bg-gray-600/50 disabled:border-0 disabled:hover:cursor-not-allowed hover:border-[#e2d0b2] uppercase font-bold rounded shadow-2xl"
+              onClick={() => selectHandler(data._id)}
+              disabled={data.availAbleSeat < 1 && "disabled"}
+            >
               Select class
-            </SecondaryButton>
+            </button>
           </div>
         </div>
       </div>

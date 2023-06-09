@@ -1,18 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../hooks/useAuth";
-import useAxiosSecure from "./useAxiosSecure";
+import axios from "axios";
 
 const useApprovedClassesFetch = () => {
-    const {user} = useAuth();
-    const [axiosSecure] = useAxiosSecure();
-
 
     const {data: approvedClasses = [], isLoading: approvedClassesLoading, refetch} = useQuery({ 
         queryKey: ['approvedClasses'],
-        enabled:!!user?.email && !!localStorage.getItem('access-token'),
   
+        // public showing data
         queryFn: async ()=>  {
-          const fetchedData= await axiosSecure.get(`/approvedClasses`);
+          const fetchedData= await axios.get(`http://localhost:5000/approvedClasses`);
           return fetchedData.data;
         },
       });
