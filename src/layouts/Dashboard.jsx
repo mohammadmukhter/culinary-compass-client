@@ -43,6 +43,14 @@ const Dashboard = () => {
               <Link to="/dashboard/manageUsers">Manage Users Home</Link>
             </li>
 
+            {/* all the student dashboard navigation */}
+            <li>
+              <Link to="/dashboard/studentHome">Student Home</Link>
+              <Link to="/dashboard/mySelectedClasses">My Selected Classes</Link>
+              <Link to="/dashboard/myEnrolledClasses">My Enrolled Classes</Link>
+            </li>
+
+            {/* all the home navigation */}
             <div className="divider"></div>
             <li>
               <Link to="/">Home</Link>
