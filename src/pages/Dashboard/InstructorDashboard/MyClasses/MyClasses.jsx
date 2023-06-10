@@ -6,7 +6,11 @@ const MyClasses = () => {
   // console.log(classes);
 
   if (classesLoading) {
-    return <h2>Loading....</h2>;
+    return (
+      <div className="flex justify-center items-center">
+        <span className="loading loading-spinner text-warning"></span>
+      </div>
+    );
   }
 
   return (

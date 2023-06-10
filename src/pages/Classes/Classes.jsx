@@ -7,7 +7,11 @@ const Classes = () => {
     useApprovedClassesFetch();
 
   if (approvedClassesLoading) {
-    return <h2>Loading.....</h2>;
+    return (
+      <div className="flex justify-center items-center">
+        <span className="loading loading-spinner text-warning"></span>
+      </div>
+    );
   }
 
   return (

@@ -50,6 +50,7 @@ const AddClass = () => {
             instructorName,
             instructorEmail,
             availAbleSeat: parseInt(availAbleSeat),
+            enrolled: 0,
             price: parseFloat(price),
             classImage: imageUrl,
             status: "pending",

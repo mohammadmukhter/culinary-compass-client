@@ -4,7 +4,11 @@ const PaymentHistory = () => {
   const [paymentData, paymentDataLoading] = usePaymentData();
 
   if (paymentDataLoading) {
-    return <h2>Loading...</h2>;
+    return (
+      <div className="flex justify-center items-center">
+        <span className="loading loading-spinner text-warning"></span>
+      </div>
+    );
   }
   return (
     <div className="mx-4">
@@ -14,20 +18,20 @@ const PaymentHistory = () => {
         </h2>
         <div className="font-bold my-2">
           <span className="uppercase">Student Email:</span>{" "}
-          {paymentData[0].studentEmail}
+          {paymentData && paymentData[0]?.studentEmail}
         </div>
       </div>
       <div className="overflow-x-auto">
-        <table className="table-auto">
+        <table className="table">
           <thead className="bg-gray-800/50 text-white">
             <tr>
-              <th className="px-2 py-1">#</th>
-              <th className="px-2 py-1">Class ID</th>
-              <th className="px-2 py-1">Transaction ID</th>
-              <th className="px-2 py-1">Price</th>
-              <th className="px-2 py-1">Transaction Date</th>
-              <th className="px-2 py-1">Currency</th>
-              <th className="px-2 py-1">Payment Method</th>
+              <th className="px-2 py-1 border-[1px]">#</th>
+              <th className="px-2 py-1 border-[1px]">Class ID</th>
+              <th className="px-2 py-1 border-[1px]">Transaction ID</th>
+              <th className="px-2 py-1 border-[1px]">Price</th>
+              <th className="px-2 py-1 border-[1px]">Transaction Date</th>
+              <th className="px-2 py-1 border-[1px]">Currency</th>
+              <th className="px-2 py-1 border-[1px]">Payment Method</th>
             </tr>
           </thead>
           <tbody className="bg-green-100/80">
@@ -35,15 +39,19 @@ const PaymentHistory = () => {
               paymentData.map((data, index) => (
                 <>
                   <tr key={data._id}>
-                    <th className="px-2 py-1">{index + 1}</th>
-                    <td className="px-2 py-1">{data.classId}</td>
-                    <td className="px-2 py-1">{data.transactionId}</td>
-                    <td className="px-2 py-1 text-end font-semibold text-purple-700">
+                    <th className="px-2 py-1 border-[1px]">{index + 1}</th>
+                    <td className="px-2 py-1 border-[1px]">{data.classId}</td>
+                    <td className="px-2 py-1 border-[1px]">
+                      {data.transactionId}
+                    </td>
+                    <td className="px-2 py-1 border-[1px] text-end font-semibold text-purple-700">
                       {data.price}
                     </td>
-                    <td className="px-2 py-1">{data.date}</td>
-                    <td className="px-2 py-1">{data.currency}</td>
-                    <td className="px-2 py-1">{data.paymentMethod[0]}</td>
+                    <td className="px-2 py-1 border-[1px]">{data.date}</td>
+                    <td className="px-2 py-1 border-[1px]">{data.currency}</td>
+                    <td className="px-2 py-1 border-[1px]">
+                      {data.paymentMethod[0]}
+                    </td>
                   </tr>
                 </>
               ))}

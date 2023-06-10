@@ -9,7 +9,11 @@ const Dashboard = () => {
   const [isAdmin, isAdminLoading] = useIsAdmin();
 
   if (isStudentLoading || isInstructorLoading || isAdminLoading) {
-    return <h2>Loading.....ats</h2>;
+    return (
+      <div className="flex justify-center items-center">
+        <span className="loading loading-spinner text-warning"></span>
+      </div>
+    );
   }
 
   return (

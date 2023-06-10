@@ -13,7 +13,11 @@ const ClassCard = ({ data, refetch }) => {
   const [isInstructor, isInstructorLoading] = useIsInstructor();
 
   if ((user && isInstructorLoading) || (user && isAdminLoading)) {
-    return <h2>Loading....</h2>;
+    return (
+      <div className="flex justify-center items-center">
+        <span className="loading loading-spinner text-warning"></span>
+      </div>
+    );
   }
 
   const selectHandler = (classId) => {
