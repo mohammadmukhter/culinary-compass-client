@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import useAllClassesData from "../../../../hooks/useAllClassesData";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
@@ -22,7 +23,7 @@ const ManageClasses = () => {
 
   //class status change handler
   const statusChangeHandler = (classId, classStatus) => {
-    console.log(classId, classStatus);
+    // console.log(classId, classStatus);
 
     axiosSecure
       .patch(`/classes/${classId}`, {
@@ -31,6 +32,17 @@ const ManageClasses = () => {
       .then((res) => {
         console.log(res.data);
         if (res.data.modifiedCount > 0) {
+          toast.success("Class Status Changed successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+
           refetch();
         }
       })
@@ -49,7 +61,16 @@ const ManageClasses = () => {
       .then((res) => {
         // console.log(res.data);
         if (res.data.modifiedCount > 0) {
-          console.log("Feedback sent successfully");
+          toast.success("Feedback Sent successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
           refetch();
           reset();
           setSelectedId(null);
@@ -57,6 +78,16 @@ const ManageClasses = () => {
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Something went wrong!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       });
   };
 

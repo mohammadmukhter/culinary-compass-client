@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import bgImg from "../../assets/banner/pastry2.jpg";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import useAuth from "../../hooks/useAuth";
@@ -17,7 +18,19 @@ const Login = () => {
     googleHandler()
       .then((res) => {
         const user = res.user;
+
         if (user) {
+          toast.success("User Log In Successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+
           const userInfo = {
             name: user.displayName,
             email: user.email,
@@ -52,13 +65,34 @@ const Login = () => {
     loginHandler(data.email, data.password)
       .then((res) => {
         const loggedUser = res.user;
-        console.log(loggedUser);
+        if (loggedUser) {
+          toast.success("User Log In Successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
 
         reset();
         navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);
+        toast.error("User not found!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       });
   };
 

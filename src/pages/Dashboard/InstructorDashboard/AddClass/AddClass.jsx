@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import PrimaryButton from "../../../../components/PrimaryButton/PrimaryButton";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
@@ -57,9 +58,30 @@ const AddClass = () => {
           axiosSecure
             .post("/classes", newItem)
             .then((res) => {
-              console.log(res.data);
+              if (res.data.insertedId) {
+                toast.success("Class Added Successfully", {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                });
+              }
             })
             .catch((err) => {
+              toast.error("Something Went wrong!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
               console.log(err);
             });
 

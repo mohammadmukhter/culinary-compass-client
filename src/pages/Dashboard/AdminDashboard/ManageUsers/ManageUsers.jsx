@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useUsersFetchData from "../../../../hooks/useUsersFetchData";
 
@@ -18,13 +19,33 @@ const ManageUsers = () => {
         role: userRole,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.modifiedCount > 0) {
+          toast.success("User Role Changed successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
           refetch();
         }
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Something Went Wrong!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       });
   };
 

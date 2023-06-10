@@ -59,7 +59,7 @@ const Dashboard = () => {
               <Link to="">Instructors</Link>
             </li>
             <li>
-              <Link to="">Classes</Link>
+              <Link to="/classes">Classes</Link>
             </li>
           </ul>
         </div>

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import bgImg from "../../assets/banner/chinese.jpg";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import useAuth from "../../hooks/useAuth";
@@ -44,6 +45,18 @@ const Register = () => {
               axios
                 .post("http://localhost:5000/users", userInfo)
                 .then((res) => {
+                  if (res.data.insertedId) {
+                    toast.success("User Created Successfully", {
+                      position: "top-right",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                    });
+                  }
                   console.log(res.data);
                 })
                 .catch((err) => {

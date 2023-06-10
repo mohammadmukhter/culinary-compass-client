@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
@@ -76,7 +77,16 @@ const CheckOutForm = ({ classData }) => {
     // console.log(paymentIntent);
     if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
-      console.log("payment successfully");
+      toast.success("Payment successful", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       const paymentInfo = {
         transactionId: paymentIntent.id,
         studentName: user?.displayName,
@@ -90,7 +100,16 @@ const CheckOutForm = ({ classData }) => {
 
       axiosSecure.post("/payments", paymentInfo).then((res) => {
         if (res.data.insertedId) {
-          console.log("Payment data inserted Successfully");
+          toast.success("Payment data Stored Successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
       });
     }

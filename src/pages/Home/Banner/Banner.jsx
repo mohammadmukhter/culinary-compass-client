@@ -9,6 +9,7 @@ import italianImg from "../../../assets/banner/itialian1.jpg";
 import pastryImg from "../../../assets/banner/pastry.jpg";
 import pastryImg2 from "../../../assets/banner/pastry2.jpg";
 
+import { Link } from "react-router-dom";
 import SecondaryButton from "../../../components/SecondaryButton/SecondaryButton";
 import "./style.css";
 
@@ -36,7 +37,9 @@ const Banner = () => {
             </h3>
 
             <div className="text-left">
-              <SecondaryButton>Our Classes</SecondaryButton>
+              <Link to="classes">
+                <SecondaryButton>Our Classes</SecondaryButton>
+              </Link>
             </div>
           </div>
         </div>
@@ -50,7 +53,9 @@ const Banner = () => {
             </h3>
 
             <div className="text-left">
-              <SecondaryButton>Our Classes</SecondaryButton>
+              <Link to="classes">
+                <SecondaryButton>Our Classes</SecondaryButton>
+              </Link>
             </div>
           </div>
         </div>
@@ -65,7 +70,9 @@ const Banner = () => {
             </h3>
 
             <div className="text-left">
-              <SecondaryButton>Our Classes</SecondaryButton>
+              <Link to="classes">
+                <SecondaryButton>Our Classes</SecondaryButton>
+              </Link>
             </div>
           </div>
         </div>
@@ -80,7 +87,9 @@ const Banner = () => {
             </h3>
 
             <div className="text-left">
-              <SecondaryButton>Our Classes</SecondaryButton>
+              <Link to="classes">
+                <SecondaryButton>Our Classes</SecondaryButton>
+              </Link>
             </div>
           </div>
         </div>
