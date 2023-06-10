@@ -2,14 +2,21 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useIsAdmin from "../../hooks/useIsAdmin";
+import useIsInstructor from "../../hooks/useIsInstructor";
 
 const ClassCard = ({ data, refetch }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [axiosSecure] = useAxiosSecure();
+  const [isAdmin, isAdminLoading] = useIsAdmin();
+  const [isInstructor, isInstructorLoading] = useIsInstructor();
+
+  if ((user && isInstructorLoading) || (user && isAdminLoading)) {
+    return <h2>Loading....</h2>;
+  }
 
   const selectHandler = (classId) => {
-    // console.log(classId);
     const insertAbleData = {
       className: data.className,
       classImage: data.classImage,
@@ -25,8 +32,8 @@ const ClassCard = ({ data, refetch }) => {
       axiosSecure
         .post("/selectedClasses", insertAbleData)
         .then((res) => {
-          // console.log(res.data);
-          if (res.data.insertedId > 0) {
+          console.log(res.data);
+          if (res.data.insertedId) {
             toast.success("Class Selected Successfully", {
               position: "top-right",
               autoClose: 5000,
@@ -42,7 +49,7 @@ const ClassCard = ({ data, refetch }) => {
         })
         .catch((err) => {
           console.log(err);
-          toast.error("Something Went Wrong!", {
+          toast.error(err.response.data.message, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -103,7 +110,11 @@ const ClassCard = ({ data, refetch }) => {
             <button
               className=" border-[1px] border-white px-4 py-1 bg-[#1F8A70] text-white hover:bg-yellow-900 hover:text-white disabled:bg-gray-600/50 disabled:border-0 disabled:hover:cursor-not-allowed hover:border-[#e2d0b2] uppercase font-bold rounded shadow-2xl"
               onClick={() => selectHandler(data._id)}
-              disabled={data.availAbleSeat < 1 && "disabled"}
+              disabled={
+                (data.availAbleSeat < 1 && "disabled") ||
+                (isAdmin === true && "disabled") ||
+                (isInstructor === true && "disabled")
+              }
             >
               Select class
             </button>

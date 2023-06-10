@@ -11,6 +11,7 @@ import MyClasses from "../pages/Dashboard/InstructorDashboard/MyClasses/MyClasse
 import Payment from "../pages/Dashboard/Payment/Payment";
 import MyEnrolledClasses from "../pages/Dashboard/StudentDashboard/MyEnrolledClasses/MyEnrolledClasses";
 import MySelectedClasses from "../pages/Dashboard/StudentDashboard/MySelectedClasses/MySelectedClasses";
+import PaymentHistory from "../pages/Dashboard/StudentDashboard/PaymentHistory/PaymentHistory";
 import StudentHome from "../pages/Dashboard/StudentDashboard/StudentHome/StudentHome";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
@@ -92,6 +93,10 @@ const Routes = createBrowserRouter([
       {
         path: "myEnrolledClasses",
         element: <MyEnrolledClasses></MyEnrolledClasses>,
+      },
+      {
+        path: "PaymentHistory",
+        element: <PaymentHistory></PaymentHistory>,
       },
 
       // payment route

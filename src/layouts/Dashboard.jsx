@@ -78,6 +78,9 @@ const Dashboard = () => {
                     My Enrolled Classes
                   </Link>
                 </li>
+                <li>
+                  <Link to="/dashboard/PaymentHistory">Payments History</Link>
+                </li>
               </>
             )}
 

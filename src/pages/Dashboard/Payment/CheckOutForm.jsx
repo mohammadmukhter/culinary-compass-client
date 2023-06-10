@@ -33,6 +33,7 @@ const CheckOutForm = ({ classData }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setCardError("");
 
     if (!stripe || !elements) {
       return;
@@ -70,7 +71,7 @@ const CheckOutForm = ({ classData }) => {
 
     if (confirmError) {
       console.log(confirmError);
-      setCardError(confirmError);
+      setCardError(confirmError.message);
     }
 
     setProcessing(false);
@@ -91,15 +92,18 @@ const CheckOutForm = ({ classData }) => {
         transactionId: paymentIntent.id,
         studentName: user?.displayName,
         studentEmail: user?.email,
+        className: classData.className,
         classId: classData.classId,
         selectedClassId: classData._id,
         price,
         date: new Date(),
+        currency: paymentIntent.currency,
+        paymentMethod: paymentIntent.payment_method_types,
         status: "servicePending",
       };
 
       axiosSecure.post("/payments", paymentInfo).then((res) => {
-        if (res.data.insertedId) {
+        if (res.data.insertedData.insertedId) {
           toast.success("Payment data Stored Successfully", {
             position: "top-right",
             autoClose: 5000,

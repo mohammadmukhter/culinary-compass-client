@@ -3,18 +3,12 @@ import useApprovedClassesFetch from "../../hooks/useApprovedClassesFetch";
 import ClassCard from "./ClassCard";
 
 const Classes = () => {
-  // const { user } = useAuth();
   const [approvedClasses, approvedClassesLoading, refetch] =
     useApprovedClassesFetch();
-  // const [isInstructor, isInstructorLoading] = useIsInstructor();
 
   if (approvedClassesLoading) {
     return <h2>Loading.....</h2>;
   }
-  // if (user && isInstructorLoading) {
-  //   return <h2>Loading.....</h2>;
-  // }
-  // console.log(isInstructor);
 
   return (
     <div className=" px-2 md:px-0 pt-[100px] bg-green-700/10 pb-12">

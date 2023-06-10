@@ -3,7 +3,7 @@ import useSelectedClasses from "../../../../hooks/useSelectedClasses";
 
 const MySelectedClasses = () => {
   const [selectedClasses, selectedClassesLoading] = useSelectedClasses();
-  console.log(selectedClasses);
+  // console.log(selectedClasses);
 
   if (selectedClassesLoading) {
     return <h2>Loading....</h2>;

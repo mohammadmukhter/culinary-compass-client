@@ -3,7 +3,7 @@ import useClassesData from "../../../../hooks/useClassesData";
 
 const MyClasses = () => {
   const [classes, classesLoading] = useClassesData();
-  console.log(classes);
+  // console.log(classes);
 
   if (classesLoading) {
     return <h2>Loading....</h2>;
