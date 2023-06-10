@@ -14,16 +14,21 @@ const CheckOutForm = ({ classData }) => {
   const [processing, setProcessing] = useState(false);
 
   const price = parseFloat(classData.price);
+  const availAbleSeat = parseInt(classData.availAbleSeat);
+  //   console.log(classData);
 
   useEffect(() => {
-    if (price > 0) {
+    if (availAbleSeat < 1) {
+      setCardError("No Available Seat!!!");
+    }
+    if (price > 0 || availAbleSeat < 1) {
       axiosSecure
         .post("http://localhost:5000/createPaymentIntent", { price })
         .then((res) => {
           setClientSecret(res.data.clientSecret);
         });
     }
-  }, [price, axiosSecure]);
+  }, [price, axiosSecure, availAbleSeat]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -110,9 +115,9 @@ const CheckOutForm = ({ classData }) => {
           }}
         />
         <button
-          className="bg-green-700 text-white px-3 py-1 font-bold rounded hover:bg-orange-700 my-2"
+          className="bg-green-700 text-white px-3 py-1 disabled:bg-gray-300 font-bold rounded hover:bg-orange-700 my-2"
           type="submit"
-          disabled={!stripe || processing || !clientSecret}
+          disabled={!stripe || processing || !clientSecret || availAbleSeat < 1}
         >
           Pay
         </button>

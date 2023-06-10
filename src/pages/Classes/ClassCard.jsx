@@ -17,6 +17,7 @@ const ClassCard = ({ data, refetch }) => {
       instructorName: data.instructorName,
       instructorEmail: data.instructorEmail,
       price: parseFloat(data.price),
+      availAbleSeat: data.availAbleSeat,
     };
 
     if (user && user.email) {

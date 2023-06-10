@@ -40,6 +40,7 @@ const MySelectedClasses = () => {
               <th className="border-[1px] rounded-sm">Photo</th>
               <th className="border-[1px] rounded-sm">Class Name</th>
               <th className="border-[1px] rounded-sm">Instructor Name</th>
+              <th className="border-[1px] rounded-sm">Available Seat</th>
               <th className="border-[1px] rounded-sm">Price</th>
               <th className="border-[1px] rounded-sm">Action</th>
             </tr>
@@ -64,12 +65,24 @@ const MySelectedClasses = () => {
                   <td className=" font-semibold border-[1px] rounded-sm">
                     {data.instructorName}
                   </td>
+                  <td className=" font-semibold border-[1px] rounded-sm">
+                    {data?.availAbleSeat < 1 ? (
+                      <span className="text-red-500 font-bold">
+                        No Available Seat
+                      </span>
+                    ) : (
+                      data?.availAbleSeat
+                    )}
+                  </td>
                   <td className="text-end text-green-700 font-semibold border-[1px] rounded-sm">
                     {data.price}
                   </td>
                   <td className=" border-[1px] rounded-sm space-y-1">
                     <Link to="/dashboard/payment" state={{ classData: data }}>
-                      <button className="btn btn-ghost btn-xs bg-orange-600 text-white">
+                      <button
+                        disabled={data?.availAbleSeat < 1 && "disabled"}
+                        className=" px-3 py-[1px] font-semibold hover:bg-gray-400 rounded-lg bg-orange-600 disabled:cursor-not-allowed disabled:bg-gray-400/70 text-white"
+                      >
                         Pay
                       </button>
                     </Link>
