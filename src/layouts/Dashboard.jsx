@@ -1,6 +1,17 @@
 import { Link, Outlet } from "react-router-dom";
+import useIsAdmin from "../hooks/useIsAdmin";
+import useIsInstructor from "../hooks/useIsInstructor";
+import useIsStudent from "../hooks/useIsStudent";
 
 const Dashboard = () => {
+  const [isStudent, isStudentLoading] = useIsStudent();
+  const [isInstructor, isInstructorLoading] = useIsInstructor();
+  const [isAdmin, isAdminLoading] = useIsAdmin();
+
+  if (isStudentLoading || isInstructorLoading || isAdminLoading) {
+    return <h2>Loading.....ats</h2>;
+  }
+
   return (
     <div className="max-w-[1340px] mx-auto">
       <div className="w-fit mx-auto">
@@ -22,33 +33,53 @@ const Dashboard = () => {
             {/* Sidebar content here */}
 
             {/* all the Instructor Navigation */}
-            <li>
-              <Link to="/dashboard/instructorHome">Instruct Home</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/addClass">Add Class</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/myClasses">My Classes</Link>
-            </li>
+            {isInstructor && (
+              <>
+                <li>
+                  <Link to="/dashboard/instructorHome">Instruct Home</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/addClass">Add Class</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/myClasses">My Classes</Link>
+                </li>
+              </>
+            )}
 
             {/* all the admin navigation */}
-            <li>
-              <Link to="/dashboard/adminHome">Admin Home</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/manageClasses">Manage Classes</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/manageUsers">Manage Users Home</Link>
-            </li>
+            {isAdmin && (
+              <>
+                <li>
+                  <Link to="/dashboard/adminHome">Admin Home</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/manageClasses">Manage Classes</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/manageUsers">Manage Users Home</Link>
+                </li>
+              </>
+            )}
 
             {/* all the student dashboard navigation */}
-            <li>
-              <Link to="/dashboard/studentHome">Student Home</Link>
-              <Link to="/dashboard/mySelectedClasses">My Selected Classes</Link>
-              <Link to="/dashboard/myEnrolledClasses">My Enrolled Classes</Link>
-            </li>
+            {isStudent && (
+              <>
+                <li>
+                  <Link to="/dashboard/studentHome">Student Home</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/mySelectedClasses">
+                    My Selected Classes
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/myEnrolledClasses">
+                    My Enrolled Classes
+                  </Link>
+                </li>
+              </>
+            )}
 
             {/* all the home navigation */}
             <div className="divider"></div>
