@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,6 +11,7 @@ const Login = () => {
   const { loginHandler, googleHandler } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [showPass, setShowPass] = useState(false);
 
   const from = location.state?.from?.pathname || "/";
   console.log(from);
@@ -135,11 +137,19 @@ const Login = () => {
                     )}
                   </div>
                   <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Password</span>
-                    </label>
+                    <div className="flex items-center gap-1">
+                      <label className="label">
+                        <span className="label-text">Password</span>
+                      </label>
+                      <p
+                        onClick={() => setShowPass(!showPass)}
+                        className="text-end hover:cursor-pointer"
+                      >
+                        show
+                      </p>
+                    </div>
                     <input
-                      type="password"
+                      type={showPass ? "text" : "password"}
                       placeholder="password"
                       {...register("password", { required: true })}
                       className="input input-bordered"

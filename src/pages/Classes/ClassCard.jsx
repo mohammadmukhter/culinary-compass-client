@@ -70,7 +70,7 @@ const ClassCard = ({ data, refetch }) => {
   };
   return (
     <div>
-      <div className="card w-full glass rounded-md shadow-lg">
+      <div className="card w-full glass rounded-md shadow-lg relative">
         <figure>
           <img
             className="rounded-md rounded-b-none w-full h-72 object-cover"
@@ -124,6 +124,13 @@ const ClassCard = ({ data, refetch }) => {
             </button>
           </div>
         </div>
+        {data.enrolled ? (
+          <div className="absolute right-2 top-2 px-2 py-1 rounded text-white font-bold bg-orange-600/80 shadow-md">
+            {data.enrolled} Enrolled
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
