@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import usePopularClassesData from "../../../hooks/usePopularClassesData";
 
 const PopularClasses = () => {
@@ -25,20 +26,31 @@ const PopularClasses = () => {
               key={classData._id}
               className="card card-compact w-full bg-base-100 shadow-xl rounded-sm relative"
             >
-              <figure>
-                <img
-                  className="h-64 w-full object-cover"
-                  src={classData.classImage}
-                  alt=""
-                />
-              </figure>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.6 }}
+              >
+                {" "}
+                <figure>
+                  <img
+                    className="h-64 w-full object-cover rounded"
+                    src={classData.classImage}
+                    alt=""
+                  />
+                </figure>
+              </motion.button>
+
               <div className="card-body">
                 <h2 className="card-title">{classData.className}</h2>
                 <p>Instructor : {classData.instructorName}</p>
                 <div className="card-actions justify-end">
-                  <button className="bg-orange-950 text-white px-3 py-1 rounded-md mx-auto font-bold  text-lg hover:bg-orange-800">
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="bg-orange-950 text-white px-3 py-1 rounded-md mx-auto font-bold  text-lg hover:bg-orange-800"
+                  >
                     Details
-                  </button>
+                  </motion.button>
                 </div>
               </div>
               <div className="absolute top-2 right-2 px-2 py-1 rounded-md bg-orange-600/80 text-white font-bold">
