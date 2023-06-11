@@ -1,6 +1,6 @@
 import usePopularClassesData from "../../../hooks/usePopularClassesData";
 
-const PopularClasses = () => {
+const PopularInstructor = () => {
   const [popularClasses, popularClassesLoading] = usePopularClassesData();
   if (popularClassesLoading) {
     return (
@@ -15,7 +15,7 @@ const PopularClasses = () => {
     <div className="my-24 mx-16">
       <div className="text-center my-8 text-5xl font-semibold">
         <h2 className="drop-shadow-lg shadow-orange-600">
-          Our Popular Classes
+          Our Popular Instructors
         </h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -23,26 +23,24 @@ const PopularClasses = () => {
           popularClasses.map((classData) => (
             <div
               key={classData._id}
-              className="card card-compact w-full bg-base-100 shadow-xl rounded-sm relative"
+              className="card w-96 bg-base-100 shadow-xl"
             >
               <figure>
                 <img
-                  className="h-64 w-full object-cover"
-                  src={classData.classImage}
-                  alt=""
+                  src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                  alt="Shoes"
                 />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">{classData.className}</h2>
-                <p>Instructor : {classData.instructorName}</p>
+                <h2 className="card-title">
+                  Shoes!
+                  <div className="badge badge-secondary">NEW</div>
+                </h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
                 <div className="card-actions justify-end">
-                  <button className="bg-orange-950 text-white px-3 py-1 rounded-md mx-auto font-bold  text-lg hover:bg-orange-800">
-                    Details
-                  </button>
+                  <div className="badge badge-outline">Fashion</div>
+                  <div className="badge badge-outline">Products</div>
                 </div>
-              </div>
-              <div className="absolute top-2 right-2 px-2 py-1 rounded-md bg-orange-600/80 text-white font-bold">
-                {classData.enrolled} Enrolled
               </div>
             </div>
           ))}
@@ -51,4 +49,4 @@ const PopularClasses = () => {
   );
 };
 
-export default PopularClasses;
+export default PopularInstructor;

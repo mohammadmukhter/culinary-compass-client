@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import bgImg from "../../assets/banner/pastry2.jpg";
@@ -141,12 +142,20 @@ const Login = () => {
                       <label className="label">
                         <span className="label-text">Password</span>
                       </label>
-                      <p
-                        onClick={() => setShowPass(!showPass)}
-                        className="text-end hover:cursor-pointer"
-                      >
-                        show
-                      </p>
+
+                      {showPass ? (
+                        <FaEye
+                          onClick={() => setShowPass(!showPass)}
+                          className=" ms-auto hover:cursor-pointer"
+                          title="Hide password"
+                        />
+                      ) : (
+                        <FaEyeSlash
+                          onClick={() => setShowPass(!showPass)}
+                          className=" ms-auto hover:cursor-pointer"
+                          title="Show password"
+                        />
+                      )}
                     </div>
                     <input
                       type={showPass ? "text" : "password"}
@@ -172,7 +181,12 @@ const Login = () => {
                     onClick={google}
                     className=" bg-white px-8 mb-4 py-1 font-bold rounded hover:text-blue-600"
                   >
-                    Google Log In
+                    <span className="flex items-center gap-3 justify-center">
+                      <span>
+                        <FaGoogle />
+                      </span>{" "}
+                      <span> Google Log In</span>
+                    </span>
                   </button>
                 </div>
                 <div className="form-control mx-7 mb-5">
