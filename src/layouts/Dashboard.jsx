@@ -1,3 +1,16 @@
+import {
+  FaCheckCircle,
+  FaHistory,
+  FaHome,
+  FaHouseUser,
+  FaListAlt,
+  FaPlusCircle,
+  FaRegListAlt,
+  FaShoppingCart,
+  FaThList,
+  FaUserCog,
+  FaUserTie,
+} from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import useIsAdmin from "../hooks/useIsAdmin";
 import useIsInstructor from "../hooks/useIsInstructor";
@@ -40,13 +53,22 @@ const Dashboard = () => {
             {isInstructor && (
               <>
                 <li>
-                  <Link to="/dashboard/instructorHome">Instruct Home</Link>
+                  <Link to="/dashboard/instructorHome">
+                    <FaHouseUser></FaHouseUser>Instruct Home
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/addClass">Add Class</Link>
+                  <Link to="/dashboard/addClass">
+                    {" "}
+                    <FaPlusCircle />
+                    Add Class
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/myClasses">My Classes</Link>
+                  <Link to="/dashboard/myClasses">
+                    <FaListAlt />
+                    My Classes
+                  </Link>
                 </li>
               </>
             )}
@@ -55,13 +77,21 @@ const Dashboard = () => {
             {isAdmin && (
               <>
                 <li>
-                  <Link to="/dashboard/adminHome">Admin Home</Link>
+                  <Link to="/dashboard/adminHome">
+                    <FaHouseUser></FaHouseUser> Admin Home
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/manageClasses">Manage Classes</Link>
+                  <Link to="/dashboard/manageClasses">
+                    <FaThList />
+                    Manage Classes
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/manageUsers">Manage Users Home</Link>
+                  <Link to="/dashboard/manageUsers">
+                    <FaUserCog />
+                    Manage Users
+                  </Link>
                 </li>
               </>
             )}
@@ -70,20 +100,27 @@ const Dashboard = () => {
             {isStudent && (
               <>
                 <li>
-                  <Link to="/dashboard/studentHome">Student Home</Link>
+                  <Link to="/dashboard/studentHome">
+                    <FaHouseUser></FaHouseUser> Student Home
+                  </Link>
                 </li>
                 <li>
                   <Link to="/dashboard/mySelectedClasses">
+                    <FaShoppingCart />
                     My Selected Classes
                   </Link>
                 </li>
                 <li>
                   <Link to="/dashboard/myEnrolledClasses">
+                    <FaCheckCircle />
                     My Enrolled Classes
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/PaymentHistory">Payments History</Link>
+                  <Link to="/dashboard/PaymentHistory">
+                    <FaHistory />
+                    Payments History
+                  </Link>
                 </li>
               </>
             )}
@@ -91,13 +128,21 @@ const Dashboard = () => {
             {/* all the home navigation */}
             <div className="divider"></div>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">
+                <FaHome></FaHome> Home
+              </Link>
             </li>
             <li>
-              <Link to="/instructors">Instructors</Link>
+              <Link to="/instructors">
+                <FaUserTie />
+                Instructors
+              </Link>
             </li>
             <li>
-              <Link to="/classes">Classes</Link>
+              <Link to="/classes">
+                <FaRegListAlt />
+                Classes
+              </Link>
             </li>
           </ul>
         </div>
