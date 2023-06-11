@@ -14,6 +14,7 @@ import MySelectedClasses from "../pages/Dashboard/StudentDashboard/MySelectedCla
 import PaymentHistory from "../pages/Dashboard/StudentDashboard/PaymentHistory/PaymentHistory";
 import StudentHome from "../pages/Dashboard/StudentDashboard/StudentHome/StudentHome";
 import Home from "../pages/Home/Home/Home";
+import Instructors from "../pages/Instructors/Instructors";
 import Login from "../pages/Login/Login";
 import PageNotFound from "../pages/PageNotFound/PageNotFound";
 import Register from "../pages/Register/Register";
@@ -40,6 +41,10 @@ const Routes = createBrowserRouter([
       {
         path: "classes",
         element: <Classes></Classes>,
+      },
+      {
+        path: "instructors",
+        element: <Instructors></Instructors>,
       },
     ],
   },

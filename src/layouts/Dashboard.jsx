@@ -94,7 +94,7 @@ const Dashboard = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="">Instructors</Link>
+              <Link to="/instructors">Instructors</Link>
             </li>
             <li>
               <Link to="/classes">Classes</Link>
