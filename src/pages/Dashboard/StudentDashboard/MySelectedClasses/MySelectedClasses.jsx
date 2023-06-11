@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useSelectedClasses from "../../../../hooks/useSelectedClasses";
 
 const MySelectedClasses = () => {
-  const [selectedClasses, selectedClassesLoading] = useSelectedClasses();
+  const [selectedClasses, selectedClassesLoading, refetch] =
+    useSelectedClasses();
+  const [axiosSecure] = useAxiosSecure();
   // console.log(selectedClasses);
 
   if (selectedClassesLoading) {
@@ -12,6 +16,32 @@ const MySelectedClasses = () => {
       </div>
     );
   }
+
+  const deleteHandler = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/selectedClass/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              refetch();
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+  };
 
   return (
     <div className="w-full px-4">
@@ -91,7 +121,10 @@ const MySelectedClasses = () => {
                       </button>
                     </Link>
                     <br />
-                    <button className="btn btn-ghost btn-xs bg-red-600 text-white">
+                    <button
+                      onClick={() => deleteHandler(data.selectedClassId)}
+                      className="btn btn-ghost btn-xs bg-red-600 text-white"
+                    >
                       Delete
                     </button>
                   </td>

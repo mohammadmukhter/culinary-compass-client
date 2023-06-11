@@ -65,6 +65,17 @@ const ClassCard = ({ data, refetch }) => {
           });
         });
     } else {
+      toast.warn("Login First Then You Can Select!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
       navigate("/login");
     }
   };

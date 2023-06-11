@@ -16,7 +16,7 @@ const useSelectedClasses = () => {
           return fetchedData.data;
         },
       });
-      console.log(selectedClasses)
+      // console.log(selectedClasses)
       
       return [selectedClasses, selectedClassesLoading, refetch];
     

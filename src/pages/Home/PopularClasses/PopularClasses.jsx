@@ -10,7 +10,7 @@ const PopularClasses = () => {
     );
   }
 
-  console.log(popularClasses);
+  // console.log(popularClasses);
   return (
     <div className="my-24 mx-16">
       <div className="text-center my-8 text-5xl font-semibold">

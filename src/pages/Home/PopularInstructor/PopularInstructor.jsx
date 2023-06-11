@@ -24,7 +24,7 @@ const PopularInstructor = () => {
     );
   }
 
-  console.log(popularInstructors);
+  // console.log(popularInstructors);
   return (
     <>
       <div className="my-24 mx-16">

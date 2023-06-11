@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import bgImg from "../../assets/banner/chinese.jpg";
@@ -8,7 +9,7 @@ import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
-  const { registerHandler, updateHandler } = useAuth();
+  const { registerHandler, updateHandler, googleHandler } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -66,6 +67,46 @@ const Register = () => {
               reset();
               setError("");
               navigate("/");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const google = () => {
+    googleHandler()
+      .then((res) => {
+        const user = res.user;
+
+        if (user) {
+          toast.success("User Log In Successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+
+          const userInfo = {
+            name: user.displayName,
+            email: user.email,
+            photoUrl: user.photoURL,
+            role: "student",
+          };
+
+          axios
+            .post("http://localhost:5000/users", userInfo)
+            .then((res) => {
+              console.log(res.data);
+              navigate("/", { replace: true });
             })
             .catch((err) => {
               console.log(err);
@@ -206,6 +247,19 @@ const Register = () => {
                   </div>
                 </form>
 
+                <div className="form-control mx-8 ">
+                  <button
+                    onClick={google}
+                    className=" bg-white px-8 mb-4 py-1 font-bold rounded hover:text-blue-600"
+                  >
+                    <span className="flex items-center gap-3 justify-center">
+                      <span>
+                        <FaGoogle />
+                      </span>{" "}
+                      <span> Google Log In</span>
+                    </span>
+                  </button>
+                </div>
                 <div className="form-control mx-7 mb-5">
                   <label className="label">
                     <span className="text-black label-text-alt">
