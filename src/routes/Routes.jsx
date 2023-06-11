@@ -15,6 +15,7 @@ import PaymentHistory from "../pages/Dashboard/StudentDashboard/PaymentHistory/P
 import StudentHome from "../pages/Dashboard/StudentDashboard/StudentHome/StudentHome";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
+import PageNotFound from "../pages/PageNotFound/PageNotFound";
 import Register from "../pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 
@@ -105,6 +106,10 @@ const Routes = createBrowserRouter([
         element: <Payment></Payment>,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <PageNotFound></PageNotFound>,
   },
 ]);
 
