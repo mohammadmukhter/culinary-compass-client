@@ -1,8 +1,22 @@
-import usePopularClassesData from "../../../hooks/usePopularClassesData";
+import "keen-slider/keen-slider.min.css";
+import { useKeenSlider } from "keen-slider/react";
+import usePopularInstructorsData from "../../../hooks/usePopularInstructorsData";
+import "./style.css";
 
 const PopularInstructor = () => {
-  const [popularClasses, popularClassesLoading] = usePopularClassesData();
-  if (popularClassesLoading) {
+  const [popularInstructors, popularInstructorsLoading] =
+    usePopularInstructorsData();
+
+  const [sliderRef] = useKeenSlider({
+    mode: "free-snap",
+    slides: {
+      origin: "center",
+      perView: 4,
+      spacing: 30,
+    },
+  });
+
+  if (popularInstructorsLoading) {
     return (
       <div className="flex justify-center items-center">
         <span className="loading loading-spinner text-warning"></span>
@@ -10,42 +24,49 @@ const PopularInstructor = () => {
     );
   }
 
-  console.log(popularClasses);
+  console.log(popularInstructors);
   return (
-    <div className="my-24 mx-16">
-      <div className="text-center my-8 text-5xl font-semibold">
-        <h2 className="drop-shadow-lg shadow-orange-600">
-          Our Popular Instructors
-        </h2>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {popularClasses &&
-          popularClasses.map((classData) => (
-            <div
-              key={classData._id}
-              className="card w-96 bg-base-100 shadow-xl"
-            >
-              <figure>
-                <img
-                  src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                  alt="Shoes"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">
-                  Shoes!
-                  <div className="badge badge-secondary">NEW</div>
-                </h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                  <div className="badge badge-outline">Fashion</div>
-                  <div className="badge badge-outline">Products</div>
+    <>
+      <div className="my-24 mx-16">
+        <div className="text-center my-8 text-5xl font-semibold">
+          <h2 className="drop-shadow-lg shadow-orange-600">
+            Our Popular Instructors
+          </h2>
+        </div>
+
+        <div ref={sliderRef} className="keen-slider">
+          {popularInstructors &&
+            popularInstructors.map((instructorData, index) => (
+              <div
+                key={instructorData._id}
+                className={`keen-slider__slide number-slide${index + 1}`}
+              >
+                <div className="card w-full bg-base-100 shadow-xl rounded">
+                  <figure>
+                    <img
+                      className="h-96 object-cover rounded"
+                      src={instructorData.instructorImage}
+                      alt=""
+                    />
+                    <div className="absolute bottom-0 left-0 w-full">
+                      <h2 className="text-white text-xl font-bold bg-black/75 text-start pl-4 py-1 ">
+                        {instructorData.instructorName}
+                        <br />
+                        <span className="font-semibold text-sm text-gray-300">
+                          Takes {instructorData.totalClasses} Classes
+                        </span>
+                      </h2>
+                    </div>
+                    <div className="absolute top-2 right-2 bg-orange-600/80 text-white font-bold px-2 py-1 rounded-lg">
+                      {instructorData.totalStudent} Student
+                    </div>
+                  </figure>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
