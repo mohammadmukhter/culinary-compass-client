@@ -37,23 +37,21 @@ const PaymentHistory = () => {
           <tbody className="bg-green-100/80">
             {paymentData &&
               paymentData.map((data, index) => (
-                <>
-                  <tr key={data._id}>
-                    <th className="px-2 py-1 border-[1px]">{index + 1}</th>
-                    <td className="px-2 py-1 border-[1px]">{data.classId}</td>
-                    <td className="px-2 py-1 border-[1px]">
-                      {data.transactionId}
-                    </td>
-                    <td className="px-2 py-1 border-[1px] text-end font-semibold text-purple-700">
-                      {data.price}
-                    </td>
-                    <td className="px-2 py-1 border-[1px]">{data.date}</td>
-                    <td className="px-2 py-1 border-[1px]">{data.currency}</td>
-                    <td className="px-2 py-1 border-[1px]">
-                      {data.paymentMethod[0]}
-                    </td>
-                  </tr>
-                </>
+                <tr key={data._id}>
+                  <th className="px-2 py-1 border-[1px]">{index + 1}</th>
+                  <td className="px-2 py-1 border-[1px]">{data.classId}</td>
+                  <td className="px-2 py-1 border-[1px]">
+                    {data.transactionId}
+                  </td>
+                  <td className="px-2 py-1 border-[1px] text-end font-semibold text-purple-700">
+                    {data.price}
+                  </td>
+                  <td className="px-2 py-1 border-[1px]">{data.date}</td>
+                  <td className="px-2 py-1 border-[1px]">{data.currency}</td>
+                  <td className="px-2 py-1 border-[1px]">
+                    {data.paymentMethod[0]}
+                  </td>
+                </tr>
               ))}
           </tbody>
         </table>
