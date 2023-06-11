@@ -1,3 +1,4 @@
+import { Slide } from "react-awesome-reveal";
 import bgImg2 from "../../../assets/banner/img1.jpg";
 import bgImg from "../../../assets/banner/pastry2.jpg";
 import useTotalClassStudentInstructor from "../../../hooks/useTotalClassStudentInstructor";
@@ -31,24 +32,26 @@ const AboutSection = () => {
               <img className="w-3/4 mx-auto rounded-lg" src={bgImg2} alt="" />
             </div>
             <div className="w-full md:w-1/2">
-              <h2 className="text-4xl font-bold mb-4 text-center md:text-left">
-                Culinary Compass
-              </h2>
-              <p className="text-gray-200 text-justify">
-                Culinary Compass Summer Edition is a specialized culinary
-                training program designed exclusively for students looking to
-                make the most of their summer vacation. This immersive program
-                offers a unique opportunity for students to dive into the world
-                of culinary arts and develop essential culinary skills during
-                their break. Led by expert chefs and instructors, Culinary
-                Compass Summer Edition combines hands-on training, interactive
-                cooking sessions, and culinary exploration to provide an
-                enriching and enjoyable summer experience. Whether students have
-                a passion for cooking or simply want to enhance their culinary
-                repertoire, Culinary Compass Summer Edition offers a dynamic and
-                engaging program tailored to the interests and needs of summer
-                vacation students.
-              </p>
+              <Slide>
+                <h2 className="text-4xl font-bold mb-4 text-center md:text-left">
+                  Culinary Compass
+                </h2>
+                <p className="text-gray-200 text-justify">
+                  Culinary Compass Summer Edition is a specialized culinary
+                  training program designed exclusively for students looking to
+                  make the most of their summer vacation. This immersive program
+                  offers a unique opportunity for students to dive into the
+                  world of culinary arts and develop essential culinary skills
+                  during their break. Led by expert chefs and instructors,
+                  Culinary Compass Summer Edition combines hands-on training,
+                  interactive cooking sessions, and culinary exploration to
+                  provide an enriching and enjoyable summer experience. Whether
+                  students have a passion for cooking or simply want to enhance
+                  their culinary repertoire, Culinary Compass Summer Edition
+                  offers a dynamic and engaging program tailored to the
+                  interests and needs of summer vacation students.
+                </p>
+              </Slide>
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-around w-full my-12 gap-6 pt-4 pb-12">
