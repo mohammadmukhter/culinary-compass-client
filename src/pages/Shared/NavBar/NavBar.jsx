@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { FaMoon, FaSun } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import logoImg from "../../../assets/culinaryLogo.svg";
 import PrimaryButton from "../../../components/PrimaryButton/PrimaryButton";
@@ -22,6 +24,26 @@ const NavBar = () => {
       });
   };
 
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
+  );
+
+  // update state on toggle
+  const handleToggle = (e) => {
+    if (e.target.checked) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem("theme");
+    // add custom data-theme attribute to html tag required to update theme using DaisyUI
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+  }, [theme]);
+
   // if (
   //   (user && isInstructorLoading) ||
   //   (user && isAdminLoading) ||
@@ -33,7 +55,7 @@ const NavBar = () => {
   const listItem = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <Link>Home</Link>
       </li>
       <li>
         <Link to="/instructors">Instructors</Link>
@@ -97,7 +119,9 @@ const NavBar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content uppercase font-medium mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className={`menu menu-sm dropdown-content uppercase font-medium mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-${
+                theme === "light" ? "gray-800" : "white"
+              }`}
             >
               {listItem}
             </ul>
@@ -107,11 +131,34 @@ const NavBar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 uppercase font-medium">
+          <ul
+            className={`menu menu-horizontal px-1 uppercase font-medium text-${
+              theme === "light" ? "gray-800" : "white"
+            }`}
+          >
             {listItem}
           </ul>
         </div>
 
+        <div>
+          <div className="flex-none">
+            {/* Toggle button here */}
+            <button className="btn btn-square btn-ghost">
+              <label className="swap swap-rotate w-12 h-12">
+                <input
+                  type="checkbox"
+                  onChange={handleToggle}
+                  checked={theme === "light" ? false : true}
+                />
+                {theme === "dark" ? (
+                  <FaSun className="text-yellow-300 text-xl" />
+                ) : (
+                  <FaMoon className="text-yellow-600 text-xl" />
+                )}
+              </label>
+            </button>
+          </div>
+        </div>
         <div className="navbar-end space-x-3">
           {user && user.email ? (
             <div className="flex items-center">

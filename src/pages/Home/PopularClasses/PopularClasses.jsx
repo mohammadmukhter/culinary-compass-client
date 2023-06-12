@@ -41,7 +41,7 @@ const PopularClasses = () => {
                 </figure>
               </motion.button>
 
-              <div className="card-body">
+              <div className={`card-body`}>
                 <h2 className="card-title">{classData.className}</h2>
                 <p>Instructor : {classData.instructorName}</p>
                 <div className="card-actions justify-end">
