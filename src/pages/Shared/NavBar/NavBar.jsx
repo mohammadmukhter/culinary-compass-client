@@ -128,8 +128,8 @@ const NavBar = () => {
                 >
                   <li>
                     <a className="justify-between">
-                      Profile
-                      <span className="badge">New</span>
+                      {user?.displayName}
+                      {/* <span className="badge">New</span> */}
                     </a>
                   </li>
                 </ul>
