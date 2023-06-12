@@ -6,7 +6,7 @@ const useIsStudent = () => {
   const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
 
-  const { data: isStudent = false , isLoading: isStudentLoading } = useQuery({
+  const { data: isStudent = [] , isLoading: isStudentLoading , refetch} = useQuery({
     queryKey: ["isStudent", user?.email],
     enabled: !!user?.email && !!localStorage.getItem("access-token"),
     queryFn: async () => {
@@ -14,7 +14,7 @@ const useIsStudent = () => {
       return res.data.student;
     },
   });
-  return [isStudent, isStudentLoading];
+  return [isStudent, isStudentLoading, refetch];
 };
 
 export default useIsStudent;

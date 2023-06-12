@@ -6,7 +6,7 @@ const useIsInstructor = () => {
     const {user} = useAuth();
     const [axiosSecure] = useAxiosSecure();
 
-    const {data: isInstructor = false, isLoading: isInstructorLoading} = useQuery({
+    const {data: isInstructor = [], isLoading: isInstructorLoading, refetch} = useQuery({
         queryKey: ['isInstructor', user?.email],
         enabled: !!user?.email && !!localStorage.getItem('access-token'),
         queryFn: async()=> {
@@ -14,7 +14,7 @@ const useIsInstructor = () => {
             return res.data.instructor;
         }
     })
-    return [isInstructor,isInstructorLoading]
+    return [isInstructor,isInstructorLoading, refetch]
 };
 
 export default useIsInstructor;

@@ -3,12 +3,14 @@ import axios from "axios";
 
 const usePopularInstructorsData = () => {
 
+
     const {data: popularInstructors = [], isLoading: popularInstructorsLoading, refetch} = useQuery({ 
         queryKey: ['popularInstructors'],
   
         // public showing popular data
+
         queryFn: async ()=>  {
-          const fetchedData= await axios.get(`http://localhost:5000/popularInstructors`);
+          const fetchedData= await axios.get(`https://culinary-compass-server.vercel.app/popularInstructors`);
           return fetchedData.data;
         },
       });

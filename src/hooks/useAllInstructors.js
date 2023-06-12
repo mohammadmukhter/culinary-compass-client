@@ -8,7 +8,7 @@ const useAllInstructors = () => {
   
         // public showing popular data
         queryFn: async ()=>  {
-          const fetchedData= await axios.get(`http://localhost:5000/allInstructors`);
+          const fetchedData= await axios.get(`https://culinary-compass-server.vercel.app/allInstructors`);
           return fetchedData.data;
         },
       });

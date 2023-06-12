@@ -2,9 +2,15 @@ import { Link } from "react-router-dom";
 import logoImg from "../../../assets/culinaryLogo.svg";
 import PrimaryButton from "../../../components/PrimaryButton/PrimaryButton";
 import useAuth from "../../../hooks/useAuth";
+import useIsAdmin from "../../../hooks/useIsAdmin";
+import useIsInstructor from "../../../hooks/useIsInstructor";
+import useIsStudent from "../../../hooks/useIsStudent";
 
 const NavBar = () => {
   const { user, logOutHandler } = useAuth();
+  const [isInstructor] = useIsInstructor();
+  const [isAdmin] = useIsAdmin();
+  const [isStudent] = useIsStudent();
 
   const logOut = () => {
     logOutHandler()
@@ -15,6 +21,14 @@ const NavBar = () => {
         console.log(err);
       });
   };
+
+  // if (
+  //   (user && isInstructorLoading) ||
+  //   (user && isAdminLoading) ||
+  //   (user && isStudentLoading)
+  // ) {
+  //   return <h2>Loading..</h2>;
+  // }
 
   const listItem = (
     <>
@@ -28,9 +42,34 @@ const NavBar = () => {
         {" "}
         <Link to="classes">Classes</Link>
       </li>
-      {user && (
+      {/* <li>
+        <Link
+          to={
+            isAdmin === true
+              ? "/dashboard/adminHome"
+              : isInstructor === true
+              ? "/dashboard/instructorHome"
+              : isStudent === true
+              ? "/dashboard/studentHome"
+              : ""
+          }
+        >
+          Dashboard
+        </Link>
+      </li> */}
+      {isInstructor === true && (
         <li>
           <Link to="/dashboard/instructorHome">Dashboard</Link>
+        </li>
+      )}
+      {isAdmin === true && (
+        <li>
+          <Link to="/dashboard/adminHome">Dashboard</Link>
+        </li>
+      )}
+      {isStudent === true && (
+        <li>
+          <Link to="/dashboard/studentHome">Dashboard</Link>
         </li>
       )}
     </>

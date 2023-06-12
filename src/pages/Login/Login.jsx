@@ -42,7 +42,7 @@ const Login = () => {
           };
 
           axios
-            .post("http://localhost:5000/users", userInfo)
+            .post("https://culinary-compass-server.vercel.app/users", userInfo)
             .then((res) => {
               console.log(res.data);
               navigate(from, { replace: true });

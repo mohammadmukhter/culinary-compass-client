@@ -3,6 +3,7 @@ import usePopularClassesData from "../../../hooks/usePopularClassesData";
 
 const PopularClasses = () => {
   const [popularClasses, popularClassesLoading] = usePopularClassesData();
+
   if (popularClassesLoading) {
     return (
       <div className="flex justify-center items-center">

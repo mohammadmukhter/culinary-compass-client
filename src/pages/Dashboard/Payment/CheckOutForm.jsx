@@ -24,7 +24,10 @@ const CheckOutForm = ({ classData }) => {
     }
     if (price > 0 || availAbleSeat < 1) {
       axiosSecure
-        .post("http://localhost:5000/createPaymentIntent", { price })
+        .post(
+          "https://culinary-compass-server.vercel.app/createPaymentIntent",
+          { price }
+        )
         .then((res) => {
           setClientSecret(res.data.clientSecret);
         });

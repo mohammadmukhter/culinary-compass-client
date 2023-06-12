@@ -12,16 +12,22 @@ import {
   FaUserTie,
 } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 import useIsAdmin from "../hooks/useIsAdmin";
 import useIsInstructor from "../hooks/useIsInstructor";
 import useIsStudent from "../hooks/useIsStudent";
 
 const Dashboard = () => {
+  const { user } = useAuth();
   const [isStudent, isStudentLoading] = useIsStudent();
   const [isInstructor, isInstructorLoading] = useIsInstructor();
   const [isAdmin, isAdminLoading] = useIsAdmin();
 
-  if (isStudentLoading || isInstructorLoading || isAdminLoading) {
+  if (
+    (user && isStudentLoading) ||
+    (user && isInstructorLoading) ||
+    (user && isAdminLoading)
+  ) {
     return (
       <div className="flex justify-center items-center">
         <span className="loading loading-spinner text-warning"></span>
