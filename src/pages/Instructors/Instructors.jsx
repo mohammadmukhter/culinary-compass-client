@@ -11,7 +11,7 @@ const Instructors = () => {
     );
   }
 
-  console.log(allInstructors);
+  // console.log(allInstructors);
   return (
     <div className=" px-2 md:px-0 pt-[100px] bg-green-700/10 pb-12">
       <div className="flex flex-col md:flex-row px-4 pb-6 ">
@@ -46,7 +46,7 @@ const Instructors = () => {
                     Takes {data.totalClasses} Classes
                   </div>
                   <div className="badge badge-outline">
-                    {data.totalStudents ? data.totalStudents : 0} Students
+                    {data.totalStudent ? data.totalStudent : 0} Students
                   </div>
                 </div>
                 <button className="bg-orange-900 w-3/4 mx-auto text-white px-4 py-1 font-semibold rounded my-3 hover:bg-orange-600">
