@@ -1,4 +1,5 @@
 import { Slide } from "react-awesome-reveal";
+import CountUp from "react-countup";
 import bgImg2 from "../../../assets/banner/img1.jpg";
 import bgImg from "../../../assets/banner/pastry2.jpg";
 import useTotalClassStudentInstructor from "../../../hooks/useTotalClassStudentInstructor";
@@ -57,19 +58,28 @@ const AboutSection = () => {
           <div className="flex flex-col md:flex-row justify-around w-full my-12 gap-6 pt-4 pb-12">
             <div className="text-center space-y-2">
               <h1 className="text-6xl font-bold drop-shadow-lg shadow-gray-800 text-white">
-                {totalClassStudentInstructor.totalInstructors}
+                <CountUp
+                  duration={2.75}
+                  end={totalClassStudentInstructor.totalInstructors}
+                />
               </h1>
               <h2 className="text-xl  text-orange-500">Instructors</h2>
             </div>
             <div className="text-center space-y-2">
               <h1 className="text-6xl font-bold drop-shadow-lg shadow-gray-800 text-white">
-                {totalClassStudentInstructor.totalStudents}
+                <CountUp
+                  duration={2.75}
+                  end={totalClassStudentInstructor.totalStudents}
+                />
               </h1>
               <h2 className="text-xl  text-orange-500">Students</h2>
             </div>
             <div className="text-center space-y-2">
               <h1 className="text-6xl font-bold drop-shadow-lg shadow-gray-800 text-white">
-                {totalClassStudentInstructor.totalClasses}
+                <CountUp
+                  duration={2.75}
+                  end={totalClassStudentInstructor.totalClasses}
+                />
               </h1>
               <h2 className="text-xl text-orange-500">Classes</h2>
             </div>
